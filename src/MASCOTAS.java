@@ -12,7 +12,6 @@ public class MASCOTAS {
     public MASCOTAS() {
     }
     //
-
     public MASCOTAS(String nombre, String especie, int edad, double peso, Boolean vacunado) {
         this.nombre = nombre;
         this.especie = especie;

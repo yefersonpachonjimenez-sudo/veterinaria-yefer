@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -5,19 +7,40 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner teclado = new Scanner(System.in);
+        List<MASCOTAS>lstMascota = new ArrayList<>();
 
-        // PEDIR DATOS (forma segura)
-        System.out.println("Ingrese el nombre de la mascota:");
-        String nombre = teclado.nextLine();
+        int op;
 
-        System.out.println("Ingrese la especie:");
-        String especie = teclado.nextLine();
+        do{
+            System.out.println("""
+                    1. CREAR OBJETO
+                    2. MOSTRAR TODO
+                    3. BUSCAR POR NOMBRE
+                    """);
+            switch (op) {
+                case 1 -> {
+                    System.out.println("Ingrese el nombre de la mascota:");
+                    String nombre = teclado.nextLine();
 
-        System.out.println("Ingrese la edad:");
-        int edad = Integer.parseInt(teclado.nextLine());
+                    System.out.println("Ingrese la especie:");
+                    String especie = teclado.nextLine();
 
-        System.out.println("Ingrese el peso:");
-        double peso = Double.parseDouble(teclado.nextLine());
+                    System.out.println("Ingrese la edad:");
+                    int edad = Integer.parseInt(teclado.nextLine());
+
+                    System.out.println("Ingrese el peso:");
+                    double peso = Double.parseDouble(teclado.nextLine());
+                }
+                case 2 -> for (MASCOTAS m : MASCOTAS )
+                    System.out.println(m);
+                case 3 -> String numCod ;
+                numCod = teclado.next();
+
+
+
+            }
+
+
 
         // CREAR OBJETO
         MASCOTAS mascota1 = new MASCOTAS();
