@@ -1,98 +1,95 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.text.DecimalFormat;
 
 public class Main {
+    void main() {
 
-    public static void main(String[] args) {
-
+        DecimalFormat of = new DecimalFormat("0.00");
         Scanner teclado = new Scanner(System.in);
-        List<MASCOTAS>lstMascota = new ArrayList<>();
+        List<MASCOTAS> lstMascota = new ArrayList<>();
+        int opc, opc1;
 
-        int op;
-
-        do{
-            System.out.println("""
-                    1. CREAR OBJETO
-                    2. MOSTRAR TODO
-                    3. BUSCAR POR NOMBRE
-                    """);
-            switch (op) {
-                case 1 -> {
-                    System.out.println("Ingrese el nombre de la mascota:");
-                    String nombre = teclado.nextLine();
-
-                    System.out.println("Ingrese la especie:");
-                    String especie = teclado.nextLine();
-
-                    System.out.println("Ingrese la edad:");
-                    int edad = Integer.parseInt(teclado.nextLine());
-
-                    System.out.println("Ingrese el peso:");
-                    double peso = Double.parseDouble(teclado.nextLine());
-                }
-                case 2 -> for (MASCOTAS m : MASCOTAS )
-                    System.out.println(m);
-                case 3 -> String numCod ;
-                numCod = teclado.next();
-
-
-
-            }
-
-
-
-        // CREAR OBJETO
-        MASCOTAS mascota1 = new MASCOTAS();
-
-        int opcion;
-
-        // MENU
+    /*
+         CREAR
+         MOSTRAR
+         BUSCAR
+     */
         do {
-            System.out.println("\n--- MENU VETERINARIA ---");
-            System.out.println("1. Mostrar información");
-            System.out.println("2. Alimentar");
-            System.out.println("3. Vacunar");
-            System.out.println("4. Cumplir años");
-            System.out.println("5. Salir");
-            System.out.print("Seleccione una opción: ");
-
-            opcion = Integer.parseInt(teclado.nextLine());
-
-            switch (opcion) {
-
+            System.out.println("""
+                        Menu
+                            1. Crear
+                            2. Mostrar todo
+                            3. Buscar por nombre
+                            4. Salir
+                    """);
+            opc = teclado.nextInt();
+            switch (opc) {
                 case 1:
-                    mascota1.mostrarInformacion();
+                    System.out.println("    Creacion de Objeto");
+                    System.out.println("Ingrese el nombre:");
+                    String nombre = teclado.next();
+                    System.out.println("Ingrese el especie:");
+                    String especie = teclado.next();
+                    System.out.println("Ingrese el edad:");
+                    int edad = teclado.nextInt();
+                    System.out.println("Ingrese el peso:");
+                    double peso = teclado.nextDouble();
+                    lstMascota.add(new MASCOTAS(nombre, especie, edad, peso));
                     break;
-
                 case 2:
-                    System.out.print("Ingrese cantidad de alimento: ");
-                    double cantidad = Double.parseDouble(teclado.nextLine());
-                    mascota1.alimentar(cantidad);
+                    for (MASCOTAS m : lstMascota) {
+                        System.out.println(m.toString());
+                    }
+                    ;
                     break;
-
                 case 3:
-                    mascota1.vacunar();
-                    break;
 
+                    System.out.println("Ingrese el nombre a buscar:");
+                    String nombreB = teclado.next();
+                    MASCOTAS mas1 = null;
+
+                    for (MASCOTAS m : lstMascota) {
+                        if (m.getNombre().equalsIgnoreCase(nombreB)) {
+                            mas1 = m;
+                        }
+                    }
+                    do {
+
+                        System.out.println("""
+                                Submenu
+                                    1. Alimentar
+                                    2. Vacunar
+                                    3. Cumplir Años
+                                    4. salir
+                                """);
+                        opc1 = teclado.nextInt();
+                        switch (opc1) {
+                            case 1:
+                                System.out.println("Ingresa el peso a añadir: ");
+                                mas1.Alimentar(teclado.nextDouble());
+                                break;
+                            case 2:
+                                mas1.Vacunar();
+                                break;
+                            case 3:
+                                mas1.CumplirAños();
+                                break;
+                            case 4:
+                                break;
+                            default:
+                                System.out.println("Opcion Incorrecta");
+                        }
+                        ;
+                    } while (opc1 != 4);
+
+                    break;
                 case 4:
-                    mascota1.cumplirAnios();
                     break;
-
-                case 5:
-                    System.out.println("Saliendo del sistema...");
-                    break;
-
                 default:
-                    System.out.println("Opción inválida.");
+                    System.out.println("Opcion Invalida");
             }
-
-        } while (opcion != 5);
-
-        // INFORMACION FINAL
-        System.out.println("\n=== ESTADO FINAL DE LA MASCOTA ===");
-        mascota1.mostrarInformacion();
-
-        teclado.close();
+        } while (opc != 4);
     }
 }
